@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>XdainoS XDN-4500 — 3D аккумулятор</title>
+<title>XdainoS XDN-1800 — 3D аккумулятор 40×30×4 мм</title>
 <style>
   *{margin:0;padding:0;box-sizing:border-box}
   html,body{height:100%;overflow:hidden;background:#04060c;
@@ -13,40 +13,37 @@
   canvas{display:block;touch-action:none}
 
   .vignette{position:fixed;inset:0;pointer-events:none;z-index:2;
-    background:radial-gradient(ellipse at 50% 45%, rgba(0,0,0,0) 35%, rgba(0,0,0,.65) 100%)}
+    background:radial-gradient(ellipse at 50% 48%, rgba(0,0,0,0) 30%, rgba(0,0,0,.72) 100%)}
 
   .hud{position:fixed;inset:0;z-index:3;pointer-events:none;
-    display:flex;flex-direction:column;justify-content:space-between;padding:22px}
-
-  .top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
+    display:flex;flex-direction:column;justify-content:space-between;padding:20px}
 
   .panel{
     pointer-events:auto;
     background:rgba(12,22,40,.55);
     border:1px solid rgba(110,180,255,.22);
     border-radius:18px;
-    padding:16px 20px;
+    padding:15px 18px;
     backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
-    box-shadow:0 12px 40px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.06);
-    max-width:340px;
+    box-shadow:0 12px 40px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.06);
+    max-width:330px;
   }
-  .brand{display:flex;align-items:center;gap:8px;font-weight:800;letter-spacing:.5px;
-    font-size:15px;color:#8fd8ff}
-  .brand .bolt{width:14px;height:14px;background:linear-gradient(180deg,#5ce1ff,#4d7cff);
+  .brand{display:flex;align-items:center;gap:7px;font-weight:800;letter-spacing:.6px;
+    font-size:14px;color:#8fd8ff}
+  .brand .bolt{width:13px;height:13px;background:linear-gradient(180deg,#5ce1ff,#4d7cff);
     clip-path:polygon(55% 0,15% 55%,45% 55%,35% 100%,85% 40%,52% 40%);}
-  .panel h1{font-size:26px;margin-top:6px;letter-spacing:.5px;
+  .panel h1{font-size:23px;margin-top:5px;letter-spacing:.5px;
     background:linear-gradient(90deg,#ffffff,#8fd8ff);-webkit-background-clip:text;
     background-clip:text;color:transparent}
-  .panel p{font-size:12.5px;color:#8ba7c9;margin-top:6px;line-height:1.5}
-  .specs{display:flex;gap:14px;margin-top:12px;flex-wrap:wrap}
-  .spec{font-size:11px;color:#6f8fb5;text-transform:uppercase;letter-spacing:.8px}
-  .spec b{display:block;font-size:15px;color:#dceaff;margin-top:3px;letter-spacing:0}
-
-  .btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+  .panel p{font-size:12px;color:#8ba7c9;margin-top:5px;line-height:1.5}
+  .specs{display:flex;gap:14px;margin-top:11px;flex-wrap:wrap}
+  .spec{font-size:10px;color:#6f8fb5;text-transform:uppercase;letter-spacing:.8px}
+  .spec b{display:block;font-size:14px;color:#dceaff;margin-top:3px;letter-spacing:0}
+  .btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
   button{
     pointer-events:auto;cursor:pointer;font-family:inherit;
     font-size:12px;font-weight:600;letter-spacing:.3px;
-    padding:9px 14px;border-radius:10px;color:#bcd7f5;
+    padding:9px 13px;border-radius:10px;color:#bcd7f5;
     background:rgba(90,150,255,.10);
     border:1px solid rgba(110,180,255,.25);
     transition:.18s;
@@ -68,20 +65,20 @@
   .loader{position:fixed;inset:0;z-index:10;display:flex;align-items:center;justify-content:center;
     flex-direction:column;gap:18px;background:#04060c;transition:opacity .6s}
   .loader.hide{opacity:0;pointer-events:none}
-  .ring{width:46px;height:46px;border-radius:50%;
+  .ring{width:44px;height:44px;border-radius:50%;
     border:2px solid rgba(110,180,255,.15);border-top-color:#5ce1ff;
     animation:spin .9s linear infinite}
   @keyframes spin{to{transform:rotate(360deg)}}
-  .loader span{font-size:12px;letter-spacing:3px;color:#5a7fa8;text-transform:uppercase}
+  .loader span{font-size:11px;letter-spacing:3px;color:#5a7fa8;text-transform:uppercase}
 
   @media (max-width:640px){
     .hud{padding:12px}
     .panel{padding:13px 15px;max-width:100%}
-    .panel h1{font-size:20px}
-    .panel p{font-size:11.5px}
+    .panel h1{font-size:19px}
+    .panel p{font-size:11px}
     .hint{font-size:10.5px;padding:7px 13px}
     button{font-size:11px;padding:8px 11px}
-    .spec b{font-size:13px}
+    .spec b{font-size:12.5px}
   }
 </style>
 </head>
@@ -91,21 +88,18 @@
 <div class="vignette"></div>
 
 <div class="hud">
-  <div class="top">
-    <div class="panel">
-      <div class="brand"><span class="bolt"></span> XdainoS</div>
-      <h1>XDN-4500</h1>
-      <p>Литий-ионный полимерный аккумулятор для смартфона</p>
-      <div class="specs">
-        <div class="spec">Ёмкость<b>4500 mAh</b></div>
-        <div class="spec">Напряжение<b>3.85 V</b></div>
-        <div class="spec">Энергия<b>17.33 Wh</b></div>
-      </div>
-      <div class="btns">
-        <button id="btnRotate" class="active">⟳ Авто-вращение</button>
-        <button id="btnReset">⌖ Сброс камеры</button>
-        <button id="btnWire">◈ Каркас</button>
-      </div>
+  <div class="panel">
+    <div class="brand"><span class="bolt"></span> XdainoS</div>
+    <h1>XDN-1800</h1>
+    <p>Литий-ионный полимерный аккумулятор · 40 × 30 × 4 мм</p>
+    <div class="specs">
+      <div class="spec">Ёмкость<b>1800 mAh</b></div>
+      <div class="spec">Напряжение<b>3.85 V</b></div>
+      <div class="spec">Энергия<b>6.93 Wh</b></div>
+    </div>
+    <div class="btns">
+      <button id="btnRotate" class="active">⟳ Авто-вращение</button>
+      <button id="btnReset">⌖ Сброс</button>
     </div>
   </div>
 
@@ -144,19 +138,17 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
 renderer.toneMappingExposure = 1.05;
+renderer.outputColorSpace = THREE.SRGBColorSpace;
 app.appendChild(renderer.domElement);
 
 const scene = new THREE.Scene();
 
 const camera = new THREE.PerspectiveCamera(38, window.innerWidth / window.innerHeight, 0.1, 200);
-const HOME_POS = new THREE.Vector3(2.6, 2.0, 4.6);
-const HOME_TARGET = new THREE.Vector3(0, 0, 0);
-camera.position.copy(HOME_POS);
 
-// окружение для металлических отражений
+// окружение для отражений
 const pmrem = new THREE.PMREMGenerator(renderer);
 scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
-scene.environmentIntensity = 0.55;
+scene.environmentIntensity = 0.5;
 pmrem.dispose();
 
 /* ============================================================
@@ -177,7 +169,7 @@ pmrem.dispose();
   tex.colorSpace = THREE.SRGBColorSpace;
 
   const sphere = new THREE.Mesh(
-    new THREE.SphereGeometry(70, 32, 24),
+    new THREE.SphereGeometry(80, 32, 24),
     new THREE.MeshBasicMaterial({ map: tex, side: THREE.BackSide, depthWrite: false })
   );
   scene.add(sphere);
@@ -185,10 +177,10 @@ pmrem.dispose();
 
 let stars;
 (function makeStars() {
-  const N = 700;
+  const N = 650;
   const pos = new Float32Array(N * 3);
   for (let i = 0; i < N; i++) {
-    const r = 7 + Math.random() * 22;
+    const r = 9 + Math.random() * 26;
     const th = Math.random() * Math.PI * 2;
     const ph = Math.acos(2 * Math.random() - 1);
     pos[i * 3]     = r * Math.sin(ph) * Math.cos(th);
@@ -198,7 +190,7 @@ let stars;
   const geo = new THREE.BufferGeometry();
   geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
   const mat = new THREE.PointsMaterial({
-    color: 0x7fc4ff, size: 0.055, transparent: true, opacity: 0.75,
+    color: 0x7fc4ff, size: 0.06, transparent: true, opacity: 0.7,
     depthWrite: false, blending: THREE.AdditiveBlending, sizeAttenuation: true
   });
   stars = new THREE.Points(geo, mat);
@@ -210,24 +202,24 @@ let stars;
    ============================================================ */
 scene.add(new THREE.HemisphereLight(0x9fc8ff, 0x070a12, 0.9));
 
-const key = new THREE.DirectionalLight(0xffffff, 2.6);
+const key = new THREE.DirectionalLight(0xffffff, 2.7);
 key.position.set(5, 7, 6);
 scene.add(key);
 
-const fill = new THREE.DirectionalLight(0x5f8dff, 1.2);
+const fill = new THREE.DirectionalLight(0x5f8dff, 1.1);
 fill.position.set(-6, 2, -4);
 scene.add(fill);
 
-const rimA = new THREE.PointLight(0x00d9ff, 14, 22, 2);
+const rimA = new THREE.PointLight(0x00d9ff, 12, 20, 2);
 rimA.position.set(-3.5, 3.2, -3.5);
 scene.add(rimA);
 
-const rimB = new THREE.PointLight(0xb14dff, 12, 22, 2);
+const rimB = new THREE.PointLight(0xb14dff, 10, 20, 2);
 rimB.position.set(4.2, -3.0, 2.4);
 scene.add(rimB);
 
 /* ============================================================
-   4. ТЕКСТУРА ЭТИКЕТКИ (рисуем на canvas)
+   4. ТЕКСТУРА ЭТИКЕТКИ (canvas 1024×768, соотношение 4:3)
    ============================================================ */
 function roundRect(c, x, y, w, h, r) {
   c.beginPath();
@@ -241,7 +233,7 @@ function roundRect(c, x, y, w, h, r) {
 
 function drawWarnIcon(c, x, y, s) {
   c.save(); c.translate(x, y);
-  c.strokeStyle = '#ffd166'; c.lineWidth = 9; c.lineJoin = 'round';
+  c.strokeStyle = '#ffd166'; c.lineWidth = 7; c.lineJoin = 'round';
   c.beginPath();
   c.moveTo(0, -s);
   c.lineTo(s * 0.98, s * 0.78);
@@ -249,7 +241,7 @@ function drawWarnIcon(c, x, y, s) {
   c.closePath();
   c.stroke();
   c.fillStyle = '#ffd166';
-  c.font = `bold ${Math.round(s * 1.15)}px Arial`;
+  c.font = `bold ${Math.round(s * 1.1)}px Arial`;
   c.textAlign = 'center'; c.textBaseline = 'middle';
   c.fillText('!', 0, s * 0.16);
   c.restore();
@@ -274,184 +266,141 @@ function drawFlameIcon(c, x, y, s) {
 
 function drawLiIcon(c, x, y, s) {
   c.save(); c.translate(x, y);
-  c.strokeStyle = '#7ef0b0'; c.lineWidth = 9;
+  c.strokeStyle = '#7ef0b0'; c.lineWidth = 7;
   c.beginPath(); c.arc(0, 0, s, 0, Math.PI * 2); c.stroke();
   c.fillStyle = '#7ef0b0';
-  c.font = `bold ${Math.round(s * 0.98)}px Arial`;
+  c.font = `bold ${Math.round(s * 0.95)}px Arial`;
   c.textAlign = 'center'; c.textBaseline = 'middle';
   c.fillText('Li', 0, s * 0.04);
   c.restore();
 }
 
 function makeLabelTexture() {
-  const W = 1024, H = 2048;
+  const W = 1024, H = 768;
   const cv = document.createElement('canvas');
   cv.width = W; cv.height = H;
   const c = cv.getContext('2d');
   c.textBaseline = 'middle';
+  c.textAlign = 'center';
 
   /* --- фон --- */
   const bg = c.createLinearGradient(0, 0, W, H);
-  bg.addColorStop(0.00, '#16273f');
-  bg.addColorStop(0.42, '#0a1222');
-  bg.addColorStop(1.00, '#04060c');
+  bg.addColorStop(0.00, '#182a44');
+  bg.addColorStop(0.45, '#0a1220');
+  bg.addColorStop(1.00, '#04070d');
   c.fillStyle = bg; c.fillRect(0, 0, W, H);
 
   /* --- диагональные блики --- */
   c.save();
   c.globalAlpha = 0.05;
   c.strokeStyle = '#8fd8ff';
-  c.lineWidth = 50;
-  for (let i = -H; i < W + H; i += 150) {
+  c.lineWidth = 60;
+  for (let i = -H; i < W + H; i += 170) {
     c.beginPath(); c.moveTo(i, 0); c.lineTo(i + H, H); c.stroke();
   }
   c.restore();
 
   /* --- рамка --- */
-  c.strokeStyle = 'rgba(110,180,255,0.30)';
-  c.lineWidth = 6;
-  roundRect(c, 30, 30, W - 60, H - 60, 48);
+  c.strokeStyle = 'rgba(110,180,255,0.28)';
+  c.lineWidth = 5;
+  roundRect(c, 22, 22, W - 44, H - 44, 40);
   c.stroke();
 
   /* --- верхняя акцентная полоса --- */
-  const acc = c.createLinearGradient(70, 0, W - 70, 0);
+  const acc = c.createLinearGradient(60, 0, W - 60, 0);
   acc.addColorStop(0.0, '#00e5ff');
   acc.addColorStop(0.5, '#5a7bff');
   acc.addColorStop(1.0, '#c04dff');
   c.fillStyle = acc;
-  roundRect(c, 70, 70, W - 140, 18, 9);
+  roundRect(c, 60, 54, W - 120, 12, 6);
   c.fill();
 
-  /* --- плюс и минус (клеммы) --- */
-  c.textAlign = 'center';
-  c.font = 'bold 96px Arial';
-  c.fillStyle = 'rgba(140,200,255,0.85)';
-  c.fillText('+', 140, 175);
-  c.fillText('–', W - 140, 175);
-
-  /* --- молния --- */
-  c.save();
-  c.translate(W / 2, 205);
-  c.fillStyle = '#5ce1ff';
-  c.shadowColor = '#00c8ff';
-  c.shadowBlur = 45;
-  c.beginPath();
-  c.moveTo(10, -82);
-  c.lineTo(60, -82);
-  c.lineTo(24, -6);
-  c.lineTo(60, -6);
-  c.lineTo(-26, 90);
-  c.lineTo(4, 14);
-  c.lineTo(-34, 14);
-  c.closePath();
-  c.fill();
-  c.restore();
+  /* --- полярность --- */
+  c.font = 'bold 52px Arial';
+  c.fillStyle = 'rgba(140,200,255,0.8)';
+  c.fillText('+', 88, 148);
+  c.fillText('–', W - 88, 148);
 
   /* --- логотип --- */
-  c.textAlign = 'center';
+  c.save();
+  c.shadowColor = 'rgba(120,200,255,0.55)';
+  c.shadowBlur = 26;
   c.fillStyle = '#f2f9ff';
-  c.shadowColor = 'rgba(120,200,255,0.6)';
-  c.shadowBlur = 30;
-  c.font = 'bold 138px "Trebuchet MS", Arial, sans-serif';
-  c.fillText('XdainoS', W / 2, 405);
-  c.shadowBlur = 0;
+  c.font = 'bold 92px "Trebuchet MS", Arial, sans-serif';
+  c.fillText('XdainoS', W / 2, 140);
+  c.restore();
 
   /* --- подзаголовок --- */
-  if ('letterSpacing' in c) c.letterSpacing = '7px';
-  c.fillStyle = 'rgba(120,190,255,0.85)';
-  c.font = '600 38px Arial, sans-serif';
-  c.fillText('POWER · ENERGY · TRUST', W / 2, 485);
-  if ('letterSpacing' in c) c.letterSpacing = '0px';
+  c.fillStyle = 'rgba(130,195,255,0.88)';
+  c.font = '600 26px Arial, sans-serif';
+  c.fillText('Li-ion Polymer Battery', W / 2, 200);
 
   /* --- разделитель --- */
-  const div = c.createLinearGradient(80, 0, W - 80, 0);
+  const div = c.createLinearGradient(70, 0, W - 70, 0);
   div.addColorStop(0, 'rgba(110,180,255,0)');
-  div.addColorStop(0.5, 'rgba(110,180,255,0.75)');
+  div.addColorStop(0.5, 'rgba(110,180,255,0.7)');
   div.addColorStop(1, 'rgba(110,180,255,0)');
   c.fillStyle = div;
-  c.fillRect(80, 545, W - 160, 3);
+  c.fillRect(70, 228, W - 140, 2.5);
 
-  /* --- тип --- */
-  c.fillStyle = '#9dc4ff';
-  c.font = '600 46px Arial, sans-serif';
-  c.fillText('Li-ion Polymer Battery', W / 2, 615);
-
-  /* --- большая ёмкость --- */
+  /* --- ёмкость --- */
   c.fillStyle = '#ffffff';
-  c.font = 'bold 238px "Trebuchet MS", Arial, sans-serif';
-  c.fillText('4500', W / 2, 838);
+  c.font = 'bold 138px "Trebuchet MS", Arial, sans-serif';
+  c.fillText('1800', W / 2 - 40, 316);
 
+  c.textAlign = 'left';
   c.fillStyle = '#5ce1ff';
-  c.font = 'bold 74px Arial, sans-serif';
-  c.fillText('mAh', W / 2, 962);
+  c.font = 'bold 52px Arial, sans-serif';
+  c.fillText('mAh', W / 2 + 122, 330);
+  c.textAlign = 'center';
 
   /* --- таблица характеристик --- */
   const rows = [
-    ['МОДЕЛЬ',     'XDN-4500'],
-    ['ТИП',        'Li-ion Polymer'],
     ['НАПРЯЖЕНИЕ', '3.85 V'],
-    ['ЁМКОСТЬ',    '4500 mAh'],
-    ['ЭНЕРГИЯ',    '17.33 Wh'],
+    ['ЭНЕРГИЯ',    '6.93 Wh'],
     ['РЕСУРС',     '800+ циклов']
   ];
-  const bx = 80, bw = W - 160, by = 1042, rh = 92;
+  const bx = 78, bw = W - 156, by = 372, rh = 62;
 
   c.fillStyle = 'rgba(90,160,255,0.07)';
-  roundRect(c, bx, by, bw, rh * rows.length + 24, 28);
+  roundRect(c, bx, by, bw, rh * rows.length + 20, 22);
   c.fill();
-  c.strokeStyle = 'rgba(110,180,255,0.30)';
-  c.lineWidth = 4;
+  c.strokeStyle = 'rgba(110,180,255,0.28)';
+  c.lineWidth = 3.5;
   c.stroke();
 
   rows.forEach((r, i) => {
-    const cy = by + 24 + rh * i + rh / 2;
+    const cy = by + 20 + rh * i + rh / 2;
 
     c.textAlign = 'left';
-    c.font = '600 36px Arial';
+    c.font = '600 27px Arial';
     c.fillStyle = 'rgba(150,200,255,0.72)';
-    c.fillText(r[0], bx + 40, cy);
+    c.fillText(r[0], bx + 34, cy);
 
     c.textAlign = 'right';
-    c.font = 'bold 44px Arial';
+    c.font = 'bold 33px Arial';
     c.fillStyle = '#eaf6ff';
-    c.fillText(r[1], bx + bw - 40, cy);
+    c.fillText(r[1], bx + bw - 34, cy);
 
     if (i < rows.length - 1) {
       c.strokeStyle = 'rgba(110,180,255,0.14)';
-      c.lineWidth = 2;
+      c.lineWidth = 1.8;
       c.beginPath();
-      c.moveTo(bx + 32, by + 24 + rh * (i + 1));
-      c.lineTo(bx + bw - 32, by + 24 + rh * (i + 1));
+      c.moveTo(bx + 26, by + 20 + rh * (i + 1));
+      c.lineTo(bx + bw - 26, by + 20 + rh * (i + 1));
       c.stroke();
     }
   });
 
   /* --- предупреждающие значки --- */
-  drawWarnIcon(c, 250, 1700, 46);
-  drawFlameIcon(c, 512, 1700, 46);
-  drawLiIcon(c, 774, 1700, 46);
-
-  /* --- штрих-код --- */
-  const barX = 150, barY = 1790, barW = W - 300, barH = 105;
-  c.fillStyle = '#ffffff';
-  roundRect(c, barX - 22, barY - 22, barW + 44, barH + 44, 16);
-  c.fill();
-
-  c.fillStyle = '#05070c';
-  let px = barX;
-  let seed = 987654321;
-  const rnd = () => { seed = (seed * 1103515245 + 12345) & 0x7fffffff; return seed / 0x7fffffff; };
-  while (px < barX + barW - 4) {
-    const w = 3 + Math.floor(rnd() * 13);
-    if (rnd() > 0.42) c.fillRect(px, barY, Math.min(w, barX + barW - px), barH);
-    px += w + 7;
-  }
+  drawWarnIcon(c, W / 2 - 100, 625, 32);
+  drawFlameIcon(c, W / 2,       625, 32);
+  drawLiIcon(c,   W / 2 + 100, 625, 32);
 
   /* --- серийный номер --- */
-  c.textAlign = 'center';
-  c.fillStyle = 'rgba(140,190,240,0.7)';
-  c.font = '600 30px "Courier New", monospace';
-  c.fillText('SN: XDN-4500-2601-000137', W / 2, 1968);
+  c.fillStyle = 'rgba(140,190,240,0.65)';
+  c.font = '600 24px "Courier New", monospace';
+  c.fillText('SN: XDN-1800-2601-000137', W / 2, 706);
 
   const tex = new THREE.CanvasTexture(cv);
   tex.colorSpace = THREE.SRGBColorSpace;
@@ -465,7 +414,7 @@ const labelTex = makeLabelTexture();
    5. МАТЕРИАЛЫ
    ============================================================ */
 const bodyMat = new THREE.MeshStandardMaterial({
-  color: 0x16233c,
+  color: 0x17243d,
   metalness: 0.92,
   roughness: 0.30,
   envMapIntensity: 0.9
@@ -477,7 +426,7 @@ const labelMat = new THREE.MeshStandardMaterial({
   metalness: 0.12,
   emissive: 0xffffff,
   emissiveMap: labelTex,
-  emissiveIntensity: 0.32,
+  emissiveIntensity: 0.30,
   envMapIntensity: 0.6
 });
 
@@ -501,81 +450,76 @@ const darkPlasticMat = new THREE.MeshStandardMaterial({
 });
 
 /* ============================================================
-   6. СБОРКА АККУМУЛЯТОРА
+   6. СБОРКА АККУМУЛЯТОРА (1 unit = 1 см)
    ============================================================ */
-const rig = new THREE.Group();      // для лёгкого покачивания
+const rig = new THREE.Group();      // лёгкое покачивание
 scene.add(rig);
 
 const model = new THREE.Group();
-model.position.y = -0.33;           // центрируем всю конструкцию
+model.position.y = -0.32;           // визуальное центрирование
 rig.add(model);
 
-/* --- корпус (мягкий "паучий" элемент) --- */
-const BODY_W = 1.7, BODY_H = 3.4, BODY_D = 0.42;
+const BODY_W = 4.0;   // 40 мм
+const BODY_H = 3.0;   // 30 мм
+const BODY_D = 0.40;  // 4 мм
+
+/* --- корпус --- */
 const body = new THREE.Mesh(
-  new RoundedBoxGeometry(BODY_W, BODY_H, BODY_D, 8, 0.09),
+  new RoundedBoxGeometry(BODY_W, BODY_H, BODY_D, 6, 0.06),
   bodyMat
 );
 model.add(body);
 
 /* --- этикетки (спереди и сзади) --- */
-const labelGeo = new THREE.PlaneGeometry(1.6, 3.2);
+const labelGeo = new THREE.PlaneGeometry(BODY_W * 0.94, BODY_H * 0.94);
 
 const labelFront = new THREE.Mesh(labelGeo, labelMat);
-labelFront.position.z = BODY_D / 2 + 0.004;
+labelFront.position.z = BODY_D / 2 + 0.003;
 model.add(labelFront);
 
 const labelBack = new THREE.Mesh(labelGeo, labelMat);
-labelBack.position.z = -(BODY_D / 2 + 0.004);
+labelBack.position.z = -(BODY_D / 2 + 0.003);
 labelBack.rotation.y = Math.PI;
 model.add(labelBack);
 
-/* --- шлейф / гибкий вывод сверху --- */
+/* --- шлейф сверху --- */
 const flexBase = new THREE.Mesh(
-  new RoundedBoxGeometry(0.58, 0.46, 0.06, 4, 0.02),
+  new RoundedBoxGeometry(0.70, 0.42, 0.05, 4, 0.018),
   flexMat
 );
-flexBase.position.set(0, BODY_H / 2 + 0.20, 0.02);
+flexBase.position.set(0, BODY_H / 2 + 0.21, 0.015);
 model.add(flexBase);
 
 /* --- разъём --- */
 const connector = new THREE.Mesh(
-  new RoundedBoxGeometry(0.84, 0.24, 0.13, 4, 0.045),
+  new RoundedBoxGeometry(1.00, 0.24, 0.10, 4, 0.035),
   darkPlasticMat
 );
-connector.position.set(0, BODY_H / 2 + 0.52, 0.03);
+connector.position.set(0, BODY_H / 2 + 0.53, 0.02);
 model.add(connector);
 
-/* --- золотые контакты на разъёме --- */
-const padGeo = new THREE.BoxGeometry(0.075, 0.13, 0.012);
-for (let i = 0; i < 5; i++) {
+/* --- золотые контакты --- */
+const padGeo = new THREE.BoxGeometry(0.065, 0.12, 0.010);
+for (let i = 0; i < 6; i++) {
   const pad = new THREE.Mesh(padGeo, goldMat);
-  pad.position.set(-0.26 + i * 0.13, BODY_H / 2 + 0.52, 0.03 + 0.065 + 0.007);
+  pad.position.set(-0.30 + i * 0.12, BODY_H / 2 + 0.53, 0.02 + 0.05 + 0.006);
   model.add(pad);
 }
 
-/* --- металлические клеммы на верхнем торце --- */
-const tabGeo = new THREE.BoxGeometry(0.20, 0.03, 0.16);
-[-0.55, 0.55].forEach(x => {
-  const tab = new THREE.Mesh(tabGeo, goldMat);
-  tab.position.set(x, BODY_H / 2 + 0.012, 0.06);
-  model.add(tab);
-});
-
-/* --- тонкая светящаяся полоска-индикатор снизу --- */
+/* --- светящаяся полоска-индикатор снизу --- */
 const stripMat = new THREE.MeshStandardMaterial({
   color: 0x0a1a2a,
   emissive: 0x00e0ff,
-  emissiveIntensity: 2.2,
+  emissiveIntensity: 2.0,
   roughness: 0.4,
   metalness: 0.2
 });
-const strip = new THREE.Mesh(new THREE.BoxGeometry(1.05, 0.035, 0.02), stripMat);
-strip.position.set(0, -BODY_H / 2 - 0.015, 0.12);
+const strip = new THREE.Mesh(new THREE.BoxGeometry(2.0, 0.022, 0.012), stripMat);
+strip.position.set(0, -BODY_H / 2 - 0.008, BODY_D / 2 - 0.02);
 model.add(strip);
 
 /* ============================================================
-   7. УПРАВЛЕНИЕ КАМЕРОЙ (360°)
+   7. УПРАВЛЕНИЕ КАМЕРОЙ (360°) + АВТО-ФИТ
    ============================================================ */
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
@@ -583,19 +527,33 @@ controls.dampingFactor = 0.07;
 controls.rotateSpeed = 0.85;
 controls.zoomSpeed = 0.9;
 controls.panSpeed = 0.7;
-controls.minDistance = 2.4;
-controls.maxDistance = 16;
+controls.minDistance = 3;
+controls.maxDistance = 26;
 controls.enablePan = true;
 controls.autoRotate = true;
 controls.autoRotateSpeed = 1.1;
-controls.target.copy(HOME_TARGET);
+controls.target.set(0, 0, 0);
+
+/* --- расчёт дистанции, чтобы модель всегда влезала --- */
+const FIT_V = 2.05;   // половина вертикального габарита (см) + запас
+const FIT_H = 2.25;   // половина горизонтального габарита (см) + запас
+const HOME_DIR = new THREE.Vector3(0.30, 0.22, 1).normalize();
+
+function fitDistance() {
+  const halfV = Math.tan(THREE.MathUtils.degToRad(camera.fov) / 2);
+  const halfH = halfV * camera.aspect;
+  return Math.max(FIT_V / halfV, FIT_H / halfH) * 1.05;
+}
+
+let homeDist = fitDistance();
+camera.position.copy(HOME_DIR).multiplyScalar(homeDist);
+controls.update();
 
 /* ============================================================
    8. UI
    ============================================================ */
 const btnRotate = document.getElementById('btnRotate');
 const btnReset  = document.getElementById('btnReset');
-const btnWire   = document.getElementById('btnWire');
 
 let camAnim = null;
 
@@ -605,21 +563,18 @@ btnRotate.addEventListener('click', () => {
 });
 
 btnReset.addEventListener('click', () => {
+  homeDist = fitDistance();
   camAnim = {
     start: performance.now(),
     dur: 750,
     fromPos: camera.position.clone(),
-    toPos: HOME_POS.clone(),
+    toPos: HOME_DIR.clone().multiplyScalar(homeDist),
     fromTgt: controls.target.clone(),
-    toTgt: HOME_TARGET.clone(),
+    toTgt: new THREE.Vector3(0, 0, 0),
     wasAuto: controls.autoRotate
   };
   controls.autoRotate = false;
-});
-
-btnWire.addEventListener('click', () => {
-  bodyMat.wireframe = !bodyMat.wireframe;
-  btnWire.classList.toggle('active', bodyMat.wireframe);
+  btnRotate.classList.remove('active');
 });
 
 /* ============================================================
@@ -633,15 +588,15 @@ function animate() {
   const t = clock.getElapsedTime();
 
   /* лёгкое покачивание модели */
-  rig.position.y = Math.sin(t * 1.15) * 0.055;
-  rig.rotation.z = Math.sin(t * 0.65) * 0.013;
-  rig.rotation.x = Math.cos(t * 0.5) * 0.010;
+  rig.position.y = Math.sin(t * 1.15) * 0.05;
+  rig.rotation.z = Math.sin(t * 0.65) * 0.012;
+  rig.rotation.x = Math.cos(t * 0.50) * 0.009;
 
   /* пульсация индикатора */
-  stripMat.emissiveIntensity = 1.6 + Math.sin(t * 3.0) * 1.0;
+  stripMat.emissiveIntensity = 1.5 + Math.sin(t * 3.0) * 1.0;
 
   /* медленное вращение звёзд */
-  if (stars) stars.rotation.y = t * 0.018;
+  if (stars) stars.rotation.y = t * 0.016;
 
   /* плавный возврат камеры */
   if (camAnim) {
@@ -667,6 +622,16 @@ window.addEventListener('resize', () => {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
   renderer.setSize(window.innerWidth, window.innerHeight);
+
+  if (!camAnim) {
+    const newHome = fitDistance();
+    const dir = camera.position.clone().sub(controls.target);
+    const ratio = dir.length() / homeDist;
+    dir.normalize();
+    homeDist = newHome;
+    camera.position.copy(controls.target).addScaledVector(dir, newHome * ratio);
+    controls.update();
+  }
 });
 
 animate();
@@ -675,7 +640,7 @@ animate();
 requestAnimationFrame(() => {
   setTimeout(() => {
     document.getElementById('loader').classList.add('hide');
-  }, 350);
+  }, 300);
 });
 </script>
 
